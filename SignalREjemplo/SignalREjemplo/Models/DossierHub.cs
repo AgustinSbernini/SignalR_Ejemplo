@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.SignalR;
+using Microsoft.AspNet.SignalR.Hubs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace SignalREjemplo.Models
         {
             Thread.Sleep(cantDossier * 100);
             Clients.Caller.DarAlerta();
+        }
+        public static void SendAlerta()
+        {
+            IHubContext context = GlobalHost.ConnectionManager.GetHubContext<DossierHub>();
+            context.Clients.All.darAlerta();
         }
     }
 }

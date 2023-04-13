@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNet.SignalR;
+using SignalREjemplo.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -8,9 +11,11 @@ namespace SignalREjemplo.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Dossier()
+        public int Dossier(int cantDossiers)
         {
-            return View();
+            Thread.Sleep(cantDossiers * 100);
+            DossierHub.SendAlerta();
+            return 1;
         }
         public ActionResult Index()
         {
